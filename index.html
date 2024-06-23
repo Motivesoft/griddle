@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator</title>
+    <style>
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        width: 200px;
+        margin: 0 auto;
+        margin-top: 50px;
+        gap: 4px;
+        grid-column-gap: 4px; /* Set the gap between columns to 4 pixels */
+        grid-row-gap: 4px; /* Set the gap between rows to 4 pixels */
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-weight: bold;
+      }
+      .grid div {
+        width: 50px;
+        height: 50px;
+        background-color: #95a1e4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        border: none;
+        border: rgb(55, 56, 134) 1px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="grid-container"></div>
+
+    <div class="grid">
+      <div>A</div>
+      <div>B</div>
+      <div>C</div>
+      <div>D</div>
+      <div>E</div>
+      <div>F</div>
+      <div>G</div>
+      <div>H</div>
+      <div>I</div>
+      <div>J</div>
+      <div>K</div>
+      <div>L</div>
+      <div>M</div>
+      <div>N</div>
+      <div>O</div>
+      <div>P</div>
+      <div>Q</div>
+      <div>R</div>
+      <div>S</div>
+      <div>T</div>
+      <div>U</div>
+      <div>V</div>
+      <div>W</div>
+      <div>X</div>
+      <div>Y</div>
+    </div>
+  </body>
+  <script>
+    const gridContainer = document.getElementById('grid-container');
+
+    // Create grid items
+    letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y'] 
+    const gridItems = Array.from({ length: 25 }, (_, index) => {
+      const item = document.createElement('div');
+      item.classList.add('grid-item');
+      item.textContent = letters[index];
+      return item;
+    });
+
+    // Append grid items to the grid container
+    gridItems.forEach(item => gridContainer.appendChild(item));
+
+    // Apply CSS grid layout to the grid container
+    gridContainer.style.display = 'grid';
+    gridContainer.style.gridTemplateColumns = 'repeat(5, 1fr)';
+    gridContainer.style.gridGap = '10px';
+  </script>
+</html>
