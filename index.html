@@ -5,8 +5,8 @@
     <style>
       .grid {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        width: 200px;
+        grid-template-columns: repeat(3, 1fr);
+        width: 100px;
         margin: 0 auto;
         margin-top: 50px;
         gap: 4px;
@@ -29,54 +29,28 @@
     </style>
   </head>
   <body>
-    <div id="grid-container"></div>
-
-    <div class="grid">
-      <div>A</div>
-      <div>B</div>
-      <div>C</div>
-      <div>D</div>
-      <div>E</div>
-      <div>F</div>
-      <div>G</div>
-      <div>H</div>
-      <div>I</div>
-      <div>J</div>
-      <div>K</div>
-      <div>L</div>
-      <div>M</div>
-      <div>N</div>
-      <div>O</div>
-      <div>P</div>
-      <div>Q</div>
-      <div>R</div>
-      <div>S</div>
-      <div>T</div>
-      <div>U</div>
-      <div>V</div>
-      <div>W</div>
-      <div>X</div>
-      <div>Y</div>
+    <div class="grid" id="grid-container">
     </div>
   </body>
   <script>
     const gridContainer = document.getElementById('grid-container');
-
+    
     // Create grid items
+    //letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'] 
+    //letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'] 
     letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y'] 
-    const gridItems = Array.from({ length: 25 }, (_, index) => {
+
+    // Apply CSS grid layout to the grid container
+    let templateColumns = 'repeat(' + Math.sqrt(letters.length) + ', 1fr)';
+    gridContainer.style.gridTemplateColumns = templateColumns
+
+    const gridItems = Array.from({ length: letters.length }, (_, index) => {
       const item = document.createElement('div');
-      item.classList.add('grid-item');
       item.textContent = letters[index];
       return item;
     });
 
     // Append grid items to the grid container
     gridItems.forEach(item => gridContainer.appendChild(item));
-
-    // Apply CSS grid layout to the grid container
-    gridContainer.style.display = 'grid';
-    gridContainer.style.gridTemplateColumns = 'repeat(5, 1fr)';
-    gridContainer.style.gridGap = '10px';
   </script>
 </html>
