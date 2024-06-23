@@ -5,7 +5,7 @@
     <style>
       .grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        /* grid-template-columns: repeat(3, 1fr); */
         width: 100px;
         margin: 0 auto;
         margin-top: 50px;
@@ -36,9 +36,9 @@
     const gridContainer = document.getElementById('grid-container');
     
     // Create grid items
-    //letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'] 
-    //letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'] 
-    letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y'] 
+    // letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'] 
+    letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'] 
+    // letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y'] 
 
     // Apply CSS grid layout to the grid container
     let templateColumns = 'repeat(' + Math.sqrt(letters.length) + ', 1fr)';
