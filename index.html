@@ -40,6 +40,7 @@
   <body>
     <div class="grid" id="grid-container">
     </div>
+    <div class="word" id="current-word"></div> 
   </body>
   <script>
     const gridContainer = document.getElementById('grid-container');
@@ -59,27 +60,32 @@
       return item;
     });
 
+    let currentWord = ""
+
     // Add click event listener to each grid item
     gridItems.forEach(item => {
       item.addEventListener('mousedown', () => {
         item.classList.toggle('active');
 
         // TODO: Clear any existing word selection and start a new one
+        resetSelection();
+        updateCurrentWord(item.textContent);
       });
 
       item.addEventListener('mouseup', () => {
         // TODO Process the selected 'word'
 
         // TODO: Clear any existing word selection and start a new one
-        gridItems.forEach(item => item.classList.remove('active'));
+        resetSelection();
       });
 
       item.addEventListener('mouseenter', () => {
         // if mouse is down, set the class active
         if (event.buttons === 1) {
           item.classList.add('active');
+
+          updateCurrentWord(currentWord + item.textContent);
         }
-        //item.classList.toggle('active');
 
         // TODO Process the selected 'word'
 
@@ -91,7 +97,15 @@
     gridItems.forEach(item => gridContainer.appendChild(item));
 
     function resetSelection() {
-      
+      gridItems.forEach(item => item.classList.remove('active'));
+
+      // TODO: anything else we need to do here?
+      updateCurrentWord("")
+    }
+
+    function updateCurrentWord(updatedWord) {
+      currentWord = updatedWord
+      document.getElementById('current-word').textContent = currentWord;
     }
   </script>
 </html>
