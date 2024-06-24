@@ -75,6 +75,7 @@
     const gridItems = Array.from({ length: letters.length }, (_, index) => {
       const item = document.createElement('div');
       item.textContent = letters[index];
+      item.id = (index/columns) + '-' + (index%columns);  // Some sort of coordinate
       return item;
     });
 
