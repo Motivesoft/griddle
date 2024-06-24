@@ -6,7 +6,7 @@
       .grid {
         display: grid;
         /* grid-template-columns: repeat(3, 1fr); */
-        width: 100px;
+        /* width: 100px; */
         margin: 0 auto;
         margin-top: 50px;
         gap: 4px;
@@ -38,20 +38,24 @@
     </style>
   </head>
   <body>
-    <div class="grid" id="grid-container">
-    </div>
-    <div class="word" id="current-word"></div> 
+    <div class="grid" id="grid-container"></div>
+    <label>Word:</label> 
+    <div class="word" id="current-word">.</div>
+    <br/>
+    <label for="log-window">Log:</label> 
+    <textarea class="log" id="log-window" rows="6" cols="50"></textarea>
   </body>
   <script>
+    const logWindow = document.getElementById('log-window');
     const gridContainer = document.getElementById('grid-container');
     
     // Create grid items
-    // letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'] 
-    letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'] 
-    // letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y'] 
+    //letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'] 
+    //letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'] 
+    letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y'] 
 
     // Apply CSS grid layout to the grid container
-    let templateColumns = 'repeat(' + Math.sqrt(letters.length) + ', 1fr)';
+    let templateColumns = 'repeat(' + Math.sqrt(letters.length) + ', 50px)';
     gridContainer.style.gridTemplateColumns = templateColumns
 
     const gridItems = Array.from({ length: letters.length }, (_, index) => {
@@ -62,17 +66,25 @@
 
     let currentWord = ""
 
+    gridContainer.addEventListener('mouseleave', () => {
+      // Clear any existing word selection
+      log("container mouseleave")
+      resetSelection();
+    });
+
     // Add click event listener to each grid item
     gridItems.forEach(item => {
       item.addEventListener('mousedown', () => {
-        item.classList.toggle('active');
-
-        // TODO: Clear any existing word selection and start a new one
+        log("mousedown with buttons: " + event.buttons)
+        // Clear any existing word selection and start a new one
         resetSelection();
+        
+        item.classList.toggle('active');
         updateCurrentWord(item.textContent);
       });
 
       item.addEventListener('mouseup', () => {
+        log("mouseup with buttons: " + event.buttons)
         // TODO Process the selected 'word'
 
         // TODO: Clear any existing word selection and start a new one
@@ -81,6 +93,7 @@
 
       item.addEventListener('mouseenter', () => {
         // if mouse is down, set the class active
+        log("mouseenter with buttons: " + event.buttons)
         if (event.buttons === 1) {
           item.classList.add('active');
 
@@ -97,6 +110,7 @@
     gridItems.forEach(item => gridContainer.appendChild(item));
 
     function resetSelection() {
+      log("> resetSelection")
       gridItems.forEach(item => item.classList.remove('active'));
 
       // TODO: anything else we need to do here?
@@ -105,7 +119,12 @@
 
     function updateCurrentWord(updatedWord) {
       currentWord = updatedWord
-      document.getElementById('current-word').textContent = currentWord;
+      document.getElementById('current-word').textContent = currentWord + ".";
+    }
+
+    function log(message) {
+      logWindow.textContent += message + "\n";
+      logWindow.scrollTo(0, logWindow.scrollHeight);
     }
   </script>
 </html>
