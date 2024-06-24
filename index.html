@@ -32,7 +32,7 @@
         background-color: #a2b6ff;
       }
 
-      .grid div:active {
+      .grid div.active {
         background-color: #ac4f97;
       }
     </style>
@@ -61,12 +61,37 @@
 
     // Add click event listener to each grid item
     gridItems.forEach(item => {
-      item.addEventListener('click', () => {
+      item.addEventListener('mousedown', () => {
         item.classList.toggle('active');
+
+        // TODO: Clear any existing word selection and start a new one
+      });
+
+      item.addEventListener('mouseup', () => {
+        // TODO Process the selected 'word'
+
+        // TODO: Clear any existing word selection and start a new one
+        gridItems.forEach(item => item.classList.remove('active'));
+      });
+
+      item.addEventListener('mouseenter', () => {
+        // if mouse is down, set the class active
+        if (event.buttons === 1) {
+          item.classList.add('active');
+        }
+        //item.classList.toggle('active');
+
+        // TODO Process the selected 'word'
+
+        // TODO: Clear any existing word selection and start a new one
       });
     });
 
     // Append grid items to the grid container
     gridItems.forEach(item => gridContainer.appendChild(item));
+
+    function resetSelection() {
+      
+    }
   </script>
 </html>
