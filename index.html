@@ -54,9 +54,12 @@
     //letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'] 
     letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y'] 
 
-    // Apply CSS grid layout to the grid container
-    let templateColumns = 'repeat(' + Math.sqrt(letters.length) + ', 50px)';
+    // Apply CSS grid layout to the grid container and fix the size
+    let columns = Math.sqrt(letters.length)
+    let templateColumns = 'repeat(' + columns + ', 50px)';
+    let templateColumnWidth = (columns*50) + ((columns-1)*4);
     gridContainer.style.gridTemplateColumns = templateColumns
+    gridContainer.style.width = templateColumnWidth + 'px'
 
     const gridItems = Array.from({ length: letters.length }, (_, index) => {
       const item = document.createElement('div');
