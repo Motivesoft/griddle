@@ -36,7 +36,7 @@
       #overlay {
         position: fixed;
         display: block;
-        background-color: rgba(64, 129, 44, 0.5);
+        background-color: rgba(0, 0, 0, 0); /* transparent */
         z-index: 2;
         pointer-events: none;
       }
@@ -71,6 +71,13 @@
 
     overlay.style.width = templateColumnWidth + 'px'
     overlay.style.height = templateColumnWidth + 'px'
+
+    const canvas = document.createElement('canvas');
+    canvas.id = "canvas";
+    canvas.style.width =  templateColumnWidth + 'px';
+    canvas.style.height =  templateColumnWidth + 'px';
+    canvas.style.position = 'absolute';
+    overlay.appendChild(canvas);
 
     const gridItems = Array.from({ length: letters.length }, (_, index) => {
       const item = document.createElement('div');
@@ -135,11 +142,28 @@
     function updateCurrentWord(updatedWord) {
       currentWord = updatedWord
       document.getElementById('current-word').textContent = currentWord + ".";
+
+      // TODO: Remove this
+      drawLine(0,0)
     }
 
     function log(message) {
       logWindow.textContent += message + "\n";
       logWindow.scrollTo(0, logWindow.scrollHeight);
+    }
+
+    function drawLine(x,y) {
+      log("drawLine: " + x + ", " + y)
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      ctx.strokeStyle = "red";
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(200, 100);
+      ctx.lineWidth = 10;
+      ctx.stroke();
     }
   </script>
 </html>
